@@ -14,18 +14,19 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Update to use version v3
 
     - name: Install SSH client
       run: sudo apt-get install -y openssh-client
 
     - name: Add SSH key
-      uses: webfactory/ssh-agent@v0.5.3
+      uses: webfactory/ssh-agent@v0.7.2  # Update to use version v0.7.2
+
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Copy deploy script to EC2
-      run: scp -o StrictHostKeyChecking=no deploy.sh ubuntu@44.201.138.227:/home/ubuntu/deploy.sh
+      run: scp -o StrictHostKeyChecking=no deploy.sh ubuntu@your-ec2-public-ip:/home/ubuntu/deploy.sh
 
     - name: Execute deploy script on EC2
-      run: ssh -o StrictHostKeyChecking=no ubuntu@44.201.138.227 'bash /home/ubuntu/deploy.sh'
+      run: ssh -o StrictHostKeyChecking=no ubuntu@your-ec2-public-ip 'bash /home/ubuntu/deploy.sh'
