@@ -28,7 +28,7 @@ jobs:
     - name: Add SSH key
       uses: webfactory/ssh-agent@v0.9.0
       with:
-        ssh-private-key: /tmp/deploy_key.pem
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Copy deploy script to EC2
       run: scp -o StrictHostKeyChecking=no deploy.sh ubuntu@44.201.138.227:/home/ubuntu/deploy.sh
