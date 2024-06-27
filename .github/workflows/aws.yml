@@ -28,10 +28,7 @@ jobs:
       run: cat /tmp/deploy_key.pem
   
     - name: Start SSH Agent and Add Key
-      uses: webfactory/ssh-agent@v0.9.0
-      with:
-        ssh-private-key: /tmp/deploy_key.pem
-        log-public-key: true
+      run: ssh-add /tmp/deploy_key.pem
   
     - name: Verify Added Key
       run: ssh-add -l
